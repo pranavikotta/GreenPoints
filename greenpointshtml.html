@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+    header {
+        background: black;
+        padding: 10px 0;
+        text-align: left;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+        background-color: white;
+    }
+    .gradient-section {
+        background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 230, 0), orange);
+        text-align: left;
+        padding: 5px; /* Adjust padding as needed */
+        color: black; /* Set text color for better contrast */
+    }
+    table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: 20px 0 0 20px;
+        
+    }
+    th, td {
+        border: 1px solid white;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: white;
+        text-align: left;
+    }
+    .toggle-section {
+        background: white;
+        text-align: center;
+    }
+    .hidden {
+        display: none;
+    }
+    .btn {
+        background-color: #f2f2f2;
+        color: black;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .btn:hover {
+        background-color: #e2e2e2;
+    }
+</style>
+</head>
+
+<body>
+    
+    <header>
+        <h1><span style="color: rgba(255, 221, 0, 0.975);">WAT</span><span style="color: white;">CARD</span></h1>
+    </header>
+
+    <div class="gradient-section">
+    </div>
+
+    <table id="myTable">
+        <tr>
+            <th>GreenPoints</th>
+            <th>    </th>
+        </tr>
+        <tr>
+            <td>NUMBER OF TAPS</td>
+            <td id="numtaps" class="hidden"></td>
+        </tr>
+        <tr>
+            <td>PROBABILITY OF REWARD</td>
+            <td id= "watpos" class="hidden"></td>
+        </tr>
+        <tr>
+            <td>GRAND PRIZE</td>
+            <td id="grandp" class="hidden"></td>
+        </tr>
+    </table>
+
+    <div class ="toggle-section">
+        <button onclick="toggleColumn()" class="btn">Reveal</button>
+    </div>
+
+    <script>
+        // Authors : Pranavi Kotta, Diba Darooneh, Jana Hamidaldeen
+        //watcard
+        var watid;
+        var myinfo=[21000005,0]; //watid and numtaps for eachperson
+        var binofwatid = [];
+        let numtaps=1232; //numtaps is just for this prototype, in real life, numtaps will be updated per each tap
+
+        //assume tap is detected numtap times - done through a tapping device
+        for  (var i=0; i<=numtaps; i++){
+            watid = Math.floor(Math.random() * 10) + 21000000; //for fast demonstration result
+            binofwatid.push(watid);
+        }
+
+        //total number of taps for each person
+        for  (let i=0; i<=numtaps; i++){
+            if (binofwatid[i]==myinfo[0]){
+                myinfo[1]++;
+            }
+        }
+
+        //document.getElementById("demo").innerHTML = myinfo[1];
+
+        //changes possibility
+        var watpos= ((( myinfo[1]/numtaps))*100).toFixed(2);
+
+        //draw function
+        var randomwinnerid = Math.floor(Math.random() * numtaps);
+
+        //document.getElementById("winner").innerHTML = binofwatid[randomwinnerid];
+        document.getElementById("watpos").innerHTML = watpos +"%" ;
+        document.getElementById("numtaps").innerHTML =  myinfo[1];
+        document.getElementById("grandp").innerHTML = "$10,000";
+
+
+        function toggleColumn() {
+            var cells = document.querySelectorAll("#myTable td:nth-child(2)");
+            cells.forEach(cell => {
+                cell.classList.toggle("hidden");
+            });
+        }
+    </script>
+
+    
+</body>
+</html>
